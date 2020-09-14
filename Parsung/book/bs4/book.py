@@ -3,6 +3,7 @@ from array import *
 from bs4 import BeautifulSoup
 import pymysql
 from pymysql.cursors import DictCursor
+
 connection = pymysql.connect(
     host='localhost',
     user='root',
@@ -55,16 +56,22 @@ def isnValid(isbn):
 	isbn = isbn.replace("все, 978-5-9287-2370-5  скрыть", "")
 	isbn = isbn.replace("все, 978-5-9951-2763-5  скрыть", "")
 	return isbn;
-def  weightValid(weight):
+def  weightValid(weight):	
 	return weight[ 6 : len(weight)-1 ]
 def  dimensionsValid(dimensions):
 	return dimensions[8 :len(dimensions)-3]
 # #### #
 
 
-def SetImage(link):
-	# print(requests.get(link).content)
-	with open('img/' + link, "wb") as f:
+
+def SetImageBD():
+	name = "name-img-book" + str(index) + ".png"
+	
+
+def SetImage(link, index):
+	name = "name-img-book" + str(index) + ".png"
+ 	# print(requests.get(link).content)
+	with open('img/' + (name), "wb") as f:
 		f.write(requests.get(link).content)
 
 def poick_all():
@@ -73,6 +80,7 @@ def poick_all():
 		div = PoickElement("#product", soup)
 		img = PoickElementAll("#product-image img",div)
 		img = img[0].get("data-src")
-		SetImage(img)
+		# SetImage(img, index)
+		# SetImageBD()
 poick_all()
 
