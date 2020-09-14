@@ -36,16 +36,16 @@ class genre(models.Model):
 	def __str__(self):
 		return self.name
 
-# class book(models.Model):
-# 	title = models.CharField(max_length=255)
-# 	price = models.IntegerField()
-# 	img = models.ImageField()
-# 	isbn = models.CharField(unique=True)
-# 	weight = models.IntegerField()
-# 	dimensions = models.IntegerField()
-# 	class Meta:
-# 		verbose_name = "Книга"
-# 		verbose_name_plural = "Книги"
-# 		db_table = "book"
-# 	def __str__(self):
-# 		return self.title
+class book(models.Model):
+	title = models.CharField(max_length=255)
+	price = models.IntegerField()
+	img = models.ImageField(upload_to="book/img",blank=True)
+	isbn = models.CharField(unique=True, max_length=50)
+	weight = models.IntegerField(blank=True)
+	dimensions = models.CharField(max_length=15,blank=True)
+	class Meta:
+		verbose_name = "Книга"
+		verbose_name_plural = "Книги"
+		db_table = "book"
+	def __str__(self):
+		return self.title

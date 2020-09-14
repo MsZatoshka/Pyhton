@@ -78,6 +78,9 @@ def poick_all():
 			isbn = isbn.replace("  все, 978-5-9287-2370-5  скрыть", "")
 			isbn = isbn.replace("  все, 978-5-9951-2763-5  скрыть", "")
 			dimensions = dimensions[8 :len(dimensions)-3] 
+			sql = "Insert into series_book(name) values (%s)"	
+
+
 			# authors
 	series_json1 = set(series_json)
 	series_json2 = list(series_json1)
