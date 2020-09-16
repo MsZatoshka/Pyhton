@@ -31,7 +31,7 @@ def PoickElementAll(selector ,soup):
 	for index, elem in enumerate(soup):
 		result  = elem.select(selector)
 		if (len(result) != 0):
-			result_arr.append(result[0])
+			result_arr.append(result[0].text)
 	return result_arr
 
 
@@ -62,11 +62,23 @@ def  dimensionsValid(dimensions):
 	return dimensions[8 :len(dimensions)-3]
 # #### #
 
+ 
 
 
 def SetImageBD():
-	name = "name-img-book" + str(index) + ".png"
-	
+	sqlSelect = "SELECT * FROM `book`"
+	cursor = connection.cursor()
+	cursor.execute(sqlSelect)
+	result = cursor.fetchall()
+	print(result)
+	# print(result)
+	for index,elem in enumerate(result):
+		name = "name-img-book" + str(index) + ".png"
+		sql = "UPDATE `book` SET `img` = 'book/img/name-img-book" + str(index) +".png' WHERE `book`.`id` =" + str(elem['id'])
+		print(sql)
+		cursor = connection.cursor()
+		cursor.execute(sql)
+		connection.commit()
 
 def SetImage(link, index):
 	name = "name-img-book" + str(index) + ".png"
@@ -74,13 +86,45 @@ def SetImage(link, index):
 	with open('img/' + (name), "wb") as f:
 		f.write(requests.get(link).content)
 
+
+
+
+def SQLSELECT(sqlSelect):
+	cursor = connection.cursor()
+	cursor.execute(sqlSelect)
+	result = cursor.fetchall()
+	return result
+def SQLUpdate(sql):
+	cursor = connection.cursor()
+	cursor.execute(sql)
+	connection.commit()
+
+
+def SetF( sqlselect, nameCol,ifs, title):
+	result = SQLSELECT(f"SELECT * FROM `{sqlselect}`")
+	for elem in result:
+		# print(ifs)
+		if(elem[nameCol] == ifs):
+			# print(elem["id"])
+			Update = "UPDATE `book` SET `Publisher_id` = " + str(elem['id']) + "  WHERE `book`.`title` = '" + str(title) + "'"
+			print(Update)
+			SQLUpdate(Update)
+
 def poick_all():
 	for index in range(30): 
 		soup = read("../book/" + str(index) + ".html")
 		div = PoickElement("#product", soup)
-		img = PoickElementAll("#product-image img",div)
-		img = img[0].get("data-src")
+		# img = PoickElementAll("#product-image img",div)
+		# img = img[0].get("data-src")
+		title = PoickElementAll("#product-title > h1", div)
+		series = PoickElementAll(".series", div)
+		series = series[0][7:len(series[0])]
+		publisher = PoickElementAll(".publisher > a", div)
+		# print(publisher[0])
+		# SetF('book_series', 'name', series, title[0])
+		# print(publisher)
+		SetF('book_publisher', 'name', publisher[0] ,title[0] )
 		# SetImage(img, index)
-		# SetImageBD()
 poick_all()
 
+# SetImageBD()

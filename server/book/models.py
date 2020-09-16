@@ -43,8 +43,8 @@ class book(models.Model):
 	isbn = models.CharField("isbn",unique=True, max_length=50)
 	weight = models.IntegerField("Масса",blank=True)
 	dimensions = models.CharField("Размеры",max_length=15,blank=True)
-	Series = models.ForeignKey(series, null=True,  on_delete=models.CASCADE)
-	Publisher = models.ForeignKey(publisher, null=True,  on_delete=models.CASCADE)
+	Series = models.ForeignKey(series, null=True, blank=True, on_delete=models.CASCADE)
+	Publisher = models.ForeignKey(publisher, null=True, blank=True, on_delete=models.CASCADE)
 	class Meta:
 		verbose_name = "Книга"
 		verbose_name_plural = "Книги"

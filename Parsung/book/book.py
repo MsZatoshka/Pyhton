@@ -82,10 +82,10 @@ def poick_all():
 
 
 			# authors
-	series_json1 = set(series_json)
-	series_json2 = list(series_json1)
-	for elem in series_json2:
-		sql = "Insert into series_book(name) values (%s)"
+	publisher_json1 = set(publisher_json)
+	publisher_json2 = list(publisher_json1)
+	for elem in publisher_json2:
+		sql = "Insert into book_publisher (name) values (%s)"
 		cursor = connection.cursor()
 		cursor.execute(sql, (elem) )
 		connection.commit()
