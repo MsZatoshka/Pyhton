@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 17 2020 г., 22:42
+-- Время создания: Сен 17 2020 г., 23:02
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -182,7 +182,7 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `title`, `price`, `img`, `isbn`, `weight`, `dimensions`, `Series_id`, `Publisher_id`) VALUES
-(2, 'Алла Горбунова: Конец света, моя любовь. Рассказы', 977, 'book/img/name-img-book0.png', ' 978-5-4448-1228-0', 352, ' 207x130x25', 13, 47),
+(2, 'Алла Горбунова: Конец света, моя любовь. Рассказы', 977, 'book/img/name-img-book0.png', '978-5-4448-1228-0', 352, '207x130x25', 13, 47),
 (3, 'Анна Зенькова: Григорий без отчества Бабочкин', 841, 'book/img/name-img-book1.png', ' 978-5-00083-732-0', 502, ' 217x145x29', 11, 50),
 (4, 'Екатерина Мурашова: Гвардия тревоги', 480, 'book/img/name-img-book2.png', ' 978-5-907180-30-7', 416, ' 200x145x30', 2, 46),
 (5, 'Генри Хаггард: Копи царя Соломона', 6400, 'book/img/name-img-book3.png', ' 978-5-906928-04-7', 1454, ' 296x210x32', 6, 49),
@@ -209,25 +209,25 @@ INSERT INTO `book` (`id`, `title`, `price`, `img`, `isbn`, `weight`, `dimensions
 (26, 'Владимир Корн: Теоретик. Один и без оружия', 416, 'book/img/name-img-book24.png', ' 978-5-9922-3130-4', 255, ' 205x130x25', 1, 56),
 (27, 'Мгновения до бури. Выбор Леди', 392, 'book/img/name-img-book25.png', ' 978-5-9922-3128-1', 271, ' 205x130x25', 8, 56),
 (28, 'Ночи с Шахразадой', 480, 'book/img/name-img-book26.png', ' 978-5-907338-01-2', 256, ' 217x147x14', 9, 52),
-(29, 'Ганс Андерсен: Снежная королева', 624, 'book/img/name-img-book27.png', ' 978-5-907224-91-1', 420, ' 265x205x13', 3, 48),
+(29, 'Ганс Андерсен: Снежная королева', 624, 'book/img/name-img-book27.png', '978-5-907224-91-1', 420, '265x205x13', 3, 48),
 (33, 'Маргарита Фадеева: Приключения Петрушки', 832, 'book/img/name-img-book28.png', '978-5-907224-31-5', 660, '265x205x18', 3, 48);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `book_author`
+-- Структура таблицы `book-author`
 --
 
-CREATE TABLE `book_author` (
+CREATE TABLE `book-author` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `book_author`
+-- Дамп данных таблицы `book-author`
 --
 
-INSERT INTO `book_author` (`id`, `name`) VALUES
+INSERT INTO `book-author` (`id`, `name`) VALUES
 (126, 'Аверченко Аркадий Тимофеевич'),
 (123, 'Александров Александр'),
 (144, 'Андерсен Ханс Кристиан'),
@@ -275,19 +275,19 @@ INSERT INTO `book_author` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `book_genre`
+-- Структура таблицы `book-genre`
 --
 
-CREATE TABLE `book_genre` (
+CREATE TABLE `book-genre` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `book_genre`
+-- Дамп данных таблицы `book-genre`
 --
 
-INSERT INTO `book_genre` (`id`, `name`) VALUES
+INSERT INTO `book-genre` (`id`, `name`) VALUES
 (50, 'Классическая зарубежная поэзия'),
 (49, 'Классическая зарубежная проза'),
 (51, 'Классический зарубежный детектив'),
@@ -300,19 +300,19 @@ INSERT INTO `book_genre` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `book_publisher`
+-- Структура таблицы `book-publisher`
 --
 
-CREATE TABLE `book_publisher` (
+CREATE TABLE `book-publisher` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `book_publisher`
+-- Дамп данных таблицы `book-publisher`
 --
 
-INSERT INTO `book_publisher` (`id`, `name`) VALUES
+INSERT INTO `book-publisher` (`id`, `name`) VALUES
 (54, 'Like Book'),
 (56, 'Альфа-книга'),
 (52, 'Аркадия'),
@@ -331,19 +331,19 @@ INSERT INTO `book_publisher` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `book_series`
+-- Структура таблицы `book-series`
 --
 
-CREATE TABLE `book_series` (
+CREATE TABLE `book-series` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `book_series`
+-- Дамп данных таблицы `book-series`
 --
 
-INSERT INTO `book_series` (`id`, `name`) VALUES
+INSERT INTO `book-series` (`id`, `name`) VALUES
 (9, 'Black and White'),
 (16, 'Young Adult. Инстахит. Романтика Лены Сокол'),
 (18, 'Билингва'),
@@ -366,6 +366,42 @@ INSERT INTO `book_series` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `book_author`
+--
+
+CREATE TABLE `book_author` (
+  `id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `book_editor`
+--
+
+CREATE TABLE `book_editor` (
+  `id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `book_genre`
+--
+
+CREATE TABLE `book_genre` (
+  `id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `genre_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `django_admin_log`
 --
 
@@ -379,6 +415,14 @@ CREATE TABLE `django_admin_log` (
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+(1, '2020-09-17 19:52:13.079978', '29', 'Ганс Андерсен: Снежная королева', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\"]}}]', 11, 1),
+(2, '2020-09-17 19:53:06.759649', '2', 'Алла Горбунова: Конец света, моя любовь. Рассказы', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\"]}}]', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -455,7 +499,13 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (26, 'book', '0009_auto_20200915_2245', '2020-09-17 19:29:40.372352'),
 (27, 'book', '0010_auto_20200915_2248', '2020-09-17 19:29:40.430495'),
 (28, 'book', '0011_auto_20200916_2257', '2020-09-17 19:29:40.467423'),
-(29, 'sessions', '0001_initial', '2020-09-17 19:29:40.476447');
+(29, 'sessions', '0001_initial', '2020-09-17 19:29:40.476447'),
+(30, 'book', '0012_auto_20200917_2249', '2020-09-17 19:49:17.776153'),
+(31, 'book', '0013_book_genre', '2020-09-17 19:50:11.837135'),
+(32, 'book', '0014_auto_20200917_2250', '2020-09-17 19:50:46.455279'),
+(33, 'book', '0015_auto_20200917_2251', '2020-09-17 19:51:20.634117'),
+(34, 'book', '0016_book_author', '2020-09-17 19:55:49.318230'),
+(35, 'book', '0017_auto_20200917_2301', '2020-09-17 20:01:05.011617');
 
 -- --------------------------------------------------------
 
@@ -535,32 +585,56 @@ ALTER TABLE `book`
   ADD KEY `book_Series_id_db6171d3_fk_book_series_id` (`Series_id`);
 
 --
+-- Индексы таблицы `book-author`
+--
+ALTER TABLE `book-author`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `author_book_name_58f61901_uniq` (`name`);
+
+--
+-- Индексы таблицы `book-genre`
+--
+ALTER TABLE `book-genre`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `genre_book_name_e7fe76d2_uniq` (`name`);
+
+--
+-- Индексы таблицы `book-publisher`
+--
+ALTER TABLE `book-publisher`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `publisher_book_name_e7efbb7f_uniq` (`name`);
+
+--
+-- Индексы таблицы `book-series`
+--
+ALTER TABLE `book-series`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `series_book_name_695de159_uniq` (`name`);
+
+--
 -- Индексы таблицы `book_author`
 --
 ALTER TABLE `book_author`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `author_book_name_58f61901_uniq` (`name`);
+  ADD UNIQUE KEY `book_Author_book_id_author_id_9b1e4aef_uniq` (`book_id`,`author_id`),
+  ADD KEY `book_Author_author_id_ea31fc84_fk_book-author_id` (`author_id`);
+
+--
+-- Индексы таблицы `book_editor`
+--
+ALTER TABLE `book_editor`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `book_editor_book_id_author_id_37b1ba6d_uniq` (`book_id`,`author_id`),
+  ADD KEY `book_editor_author_id_0bce2d1d_fk_book-author_id` (`author_id`);
 
 --
 -- Индексы таблицы `book_genre`
 --
 ALTER TABLE `book_genre`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `genre_book_name_e7fe76d2_uniq` (`name`);
-
---
--- Индексы таблицы `book_publisher`
---
-ALTER TABLE `book_publisher`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `publisher_book_name_e7efbb7f_uniq` (`name`);
-
---
--- Индексы таблицы `book_series`
---
-ALTER TABLE `book_series`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `series_book_name_695de159_uniq` (`name`);
+  ADD UNIQUE KEY `book_Genre_book_id_genre_id_1ca227ad_uniq` (`book_id`,`genre_id`),
+  ADD KEY `book_Genre_genre_id_5a1426c5_fk_genreBook_id` (`genre_id`);
 
 --
 -- Индексы таблицы `django_admin_log`
@@ -637,34 +711,52 @@ ALTER TABLE `book`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT для таблицы `book-author`
+--
+ALTER TABLE `book-author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+
+--
+-- AUTO_INCREMENT для таблицы `book-genre`
+--
+ALTER TABLE `book-genre`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT для таблицы `book-publisher`
+--
+ALTER TABLE `book-publisher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT для таблицы `book-series`
+--
+ALTER TABLE `book-series`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT для таблицы `book_author`
 --
 ALTER TABLE `book_author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `book_editor`
+--
+ALTER TABLE `book_editor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `book_genre`
 --
 ALTER TABLE `book_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
---
--- AUTO_INCREMENT для таблицы `book_publisher`
---
-ALTER TABLE `book_publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
-
---
--- AUTO_INCREMENT для таблицы `book_series`
---
-ALTER TABLE `book_series`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `django_content_type`
@@ -676,7 +768,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT для таблицы `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -713,8 +805,29 @@ ALTER TABLE `auth_user_user_permissions`
 -- Ограничения внешнего ключа таблицы `book`
 --
 ALTER TABLE `book`
-  ADD CONSTRAINT `book_Publisher_id_afb15c76_fk_book_publisher_id` FOREIGN KEY (`Publisher_id`) REFERENCES `book_publisher` (`id`),
-  ADD CONSTRAINT `book_Series_id_db6171d3_fk_book_series_id` FOREIGN KEY (`Series_id`) REFERENCES `book_series` (`id`);
+  ADD CONSTRAINT `book_Publisher_id_afb15c76_fk_book_publisher_id` FOREIGN KEY (`Publisher_id`) REFERENCES `book-publisher` (`id`),
+  ADD CONSTRAINT `book_Series_id_db6171d3_fk_book_series_id` FOREIGN KEY (`Series_id`) REFERENCES `book-series` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `book_author`
+--
+ALTER TABLE `book_author`
+  ADD CONSTRAINT `book_Author_author_id_ea31fc84_fk_book-author_id` FOREIGN KEY (`author_id`) REFERENCES `book-author` (`id`),
+  ADD CONSTRAINT `book_Author_book_id_380fc95e_fk_book_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `book_editor`
+--
+ALTER TABLE `book_editor`
+  ADD CONSTRAINT `book_editor_author_id_0bce2d1d_fk_book-author_id` FOREIGN KEY (`author_id`) REFERENCES `book-author` (`id`),
+  ADD CONSTRAINT `book_editor_book_id_49c4050a_fk_book_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `book_genre`
+--
+ALTER TABLE `book_genre`
+  ADD CONSTRAINT `book_Genre_book_id_ec6bff5f_fk_book_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `book_Genre_genre_id_5a1426c5_fk_genreBook_id` FOREIGN KEY (`genre_id`) REFERENCES `book-genre` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `django_admin_log`

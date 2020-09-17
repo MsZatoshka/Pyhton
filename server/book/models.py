@@ -6,7 +6,7 @@ class author(models.Model):
 	class Meta:
 		verbose_name = "Автор"
 		verbose_name_plural = "Авторы"
-		db_table = "book_author"
+		db_table = "book-author"
 	def __str__(self):
 		return self.name
 
@@ -15,7 +15,7 @@ class series(models.Model):
 	class Meta:
 		verbose_name = "Серия книги"
 		verbose_name_plural = "Серии книг"
-		db_table = "book_series"
+		db_table = "book-series"
 	def __str__(self):
 		return self.name
 
@@ -24,7 +24,7 @@ class publisher(models.Model):
 	class Meta:
 		verbose_name = "Издательство книги"
 		verbose_name_plural = "Издательства книг"
-		db_table = "book_publisher"
+		db_table = "book-publisher"
 	def __str__(self):
 		return self.name
 class genre(models.Model):
@@ -32,7 +32,7 @@ class genre(models.Model):
 	class Meta:
 		verbose_name = "Жанр книги"
 		verbose_name_plural = "Жанр книг"
-		db_table = "book_genre"
+		db_table = "book-genre"
 	def __str__(self):
 		return self.name
 
@@ -45,6 +45,9 @@ class book(models.Model):
 	dimensions = models.CharField("Размеры",max_length=15,blank=True)
 	Series = models.ForeignKey(series, null=True, blank=True, on_delete=models.CASCADE)
 	Publisher = models.ForeignKey(publisher, null=True, blank=True, on_delete=models.CASCADE)
+	Genre = models.ManyToManyField(genre);
+	Author = models.ManyToManyField(author , related_name="author");
+	Editor = models.ManyToManyField(author, db_table = "book_editor");
 	class Meta:
 		verbose_name = "Книга"
 		verbose_name_plural = "Книги"
