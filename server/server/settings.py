@@ -81,7 +81,7 @@ DATABASES = {
         'HOST' : 'localhost',
         'USER': 'root',
         'PASSWORD': '',
-        'NAME': 'bd_python',
+        'NAME': 'python',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
