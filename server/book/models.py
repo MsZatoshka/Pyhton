@@ -46,8 +46,8 @@ class book(models.Model):
 	Series = models.ForeignKey(series, verbose_name='Серия книги', null=True, blank=True, on_delete=models.CASCADE)
 	Publisher = models.ForeignKey( publisher, verbose_name='Издатель книги', null=True, blank=True, on_delete=models.CASCADE)
 	Genre = models.ManyToManyField(genre, verbose_name='Жанр книги');
-	Author = models.ManyToManyField(author , related_name="author" , verbose_name='Автор книги');
-	Editor = models.ManyToManyField(author, db_table = "book_editor" , verbose_name='Переводчик книги');
+	Author = models.ManyToManyField(author , related_name="_author" , verbose_name='Автор книги');
+	Editor = models.ManyToManyField(author, related_name="_editor", db_table = "book_editor" , verbose_name='Переводчик книги');
 	class Meta:
 		verbose_name = "Книга"
 		verbose_name_plural = "Книги"
