@@ -43,11 +43,11 @@ class book(models.Model):
 	isbn = models.CharField("isbn",unique=True, max_length=50)
 	weight = models.IntegerField("Масса",blank=True)
 	dimensions = models.CharField("Размеры",max_length=15,blank=True)
-	Series = models.ForeignKey(series, null=True, blank=True, on_delete=models.CASCADE)
-	Publisher = models.ForeignKey(publisher, null=True, blank=True, on_delete=models.CASCADE)
-	Genre = models.ManyToManyField(genre);
-	Author = models.ManyToManyField(author , related_name="author");
-	Editor = models.ManyToManyField(author, db_table = "book_editor");
+	Series = models.ForeignKey(series, verbose_name='Серия книги', null=True, blank=True, on_delete=models.CASCADE)
+	Publisher = models.ForeignKey( publisher, verbose_name='Издатель книги', null=True, blank=True, on_delete=models.CASCADE)
+	Genre = models.ManyToManyField(genre, verbose_name='Жанр книги');
+	Author = models.ManyToManyField(author , related_name="author" , verbose_name='Автор книги');
+	Editor = models.ManyToManyField(author, db_table = "book_editor" , verbose_name='Переводчик книги');
 	class Meta:
 		verbose_name = "Книга"
 		verbose_name_plural = "Книги"
