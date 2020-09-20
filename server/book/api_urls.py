@@ -7,7 +7,8 @@ from . import views
 urlpatterns = [
 	path('', views.index,),
 	path('list/', BookList.as_view()),
-	path('<int:pk>', BookDetails.as_view()),
+    path('<int:pk>', BookDetails.as_view()),
+	path('cread/<int:pk>', BookListCread.as_view()),
 
 	path('author/list/', AuthorList.as_view()),
     path('author/<int:pk>', AuthorDetails.as_view()),

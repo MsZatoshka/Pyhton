@@ -8,13 +8,6 @@ from django.shortcuts import render
 def index(request):
 	return render(request, "book/api-index.html")
 
-# КНИГА
-class BookList(generics.ListAPIView):
-	queryset = book.objects.all()
-	serializer_class = BookListSerializers
-class BookDetails(generics.RetrieveUpdateDestroyAPIView):
-	queryset = book.objects.all() 
-	serializer_class = BookDetailsSerializers
 # АВТОР
 class AuthorList(generics.ListAPIView):
 	queryset = author.objects.all()
@@ -45,3 +38,17 @@ class GenreList(generics.ListAPIView):
 class GenreDetails(generics.RetrieveUpdateDestroyAPIView):
 	queryset = genre.objects.all() 
 	serializer_class = GenreDetailsSerializers
+
+# КНИГА
+class BookList(generics.ListAPIView):
+	queryset = book.objects.all()
+	serializer_class = BookListSerializers
+
+
+class BookDetails(generics.RetrieveAPIView):
+	queryset = book.objects.all() 
+	serializer_class = BookDetailsSerializers
+
+class BookListCread(generics.RetrieveUpdateDestroyAPIView):
+	queryset = book.objects.all()
+	serializer_class = BookDetailsCreadSerializers

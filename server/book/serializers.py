@@ -1,15 +1,6 @@
 from rest_framework import serializers
 from book.models import *
 
-# КНИГА
-class BookListSerializers(serializers.ModelSerializer):
-	class Meta:
-		model = book
-		fields = ('id', 'title', 'img' , 'price')
-class BookDetailsSerializers(serializers.ModelSerializer):
-	class Meta:
-		model = book
-		fields = '__all__'
 # АВТОр
 class AuthorListSerializers(serializers.ModelSerializer):
 	class Meta:
@@ -45,4 +36,22 @@ class GenreListSerializers(serializers.ModelSerializer):
 class GenreDetailsSerializers(serializers.ModelSerializer):
 	class Meta:
 		model = genre
+		fields = '__all__'
+# КНИГА
+class BookListSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = book
+		fields = ('id', 'title', 'img' , 'price')
+class BookDetailsSerializers(serializers.ModelSerializer):
+	Author =  AuthorDetailsSerializers(many=True, read_only=True)
+	Editor =  AuthorDetailsSerializers(many=True, read_only=True)
+	Genre =  GenreDetailsSerializers(many=True, read_only=True)
+	Series = SeriesDetailsSerializers()
+	Publisher = PublisherDetailsSerializers()
+	class Meta:
+		model = book
+		fields = '__all__'
+class BookDetailsCreadSerializers(serializers.ModelSerializer):
+	class Meta:
+		model = book
 		fields = '__all__'
