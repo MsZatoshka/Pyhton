@@ -2,7 +2,9 @@ from rest_framework import generics
 from book.models import book
 from book.serializers import *
 from django.shortcuts import render
-from book.pagination import *
+from django.core.paginator import Paginator
+from book.pagination import CustomPagination
+
 
 # Главная API-book
 def index(request):
@@ -43,7 +45,7 @@ class GenreDetails(generics.RetrieveUpdateDestroyAPIView):
 class BookList(generics.ListAPIView):
 	queryset = book.objects.all()
 	serializer_class = BookListSerializers
-	pagination_class = StandardResultsSetPagination
+	pagination_class = CustomPagination
 
 class BookDetails(generics.RetrieveAPIView):
 	queryset = book.objects.all() 
