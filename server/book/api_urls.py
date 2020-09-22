@@ -12,6 +12,7 @@ urlpatterns = [
 
 	path('author/list/', AuthorList.as_view()),
     path('author/<int:pk>', AuthorDetails.as_view()),
+    # path('filter/author/', AuthorListBooks.as_view(), name='author_name'),
 
     path('publisher/list/', PublisherList.as_view()),
     path('publisher/<int:pk>', PublisherDetails.as_view()),

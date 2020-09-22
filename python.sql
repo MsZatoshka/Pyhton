@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 17 2020 г., 23:02
+-- Время создания: Сен 22 2020 г., 21:50
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- База данных: `python`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `authtoken_token`
+--
+
+CREATE TABLE `authtoken_token` (
+  `key` varchar(40) NOT NULL,
+  `created` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `authtoken_token`
+--
+
+INSERT INTO `authtoken_token` (`key`, `created`, `user_id`) VALUES
+('8a73a4ccd970d95535963a82e583eeec69e4f02e', '2020-09-22 18:37:38.969955', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +125,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (41, 'Can add Книга', 11, 'add_book'),
 (42, 'Can change Книга', 11, 'change_book'),
 (43, 'Can delete Книга', 11, 'delete_book'),
-(44, 'Can view Книга', 11, 'view_book');
+(44, 'Can view Книга', 11, 'view_book'),
+(45, 'Can add Token', 12, 'add_token'),
+(46, 'Can change Token', 12, 'change_token'),
+(47, 'Can delete Token', 12, 'delete_token'),
+(48, 'Can view Token', 12, 'view_token');
 
 -- --------------------------------------------------------
 
@@ -133,7 +156,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$fa3beB032Zd6$ybxMCvqCR8MQlgk+gzQ4/zwNIYE7DME739YqTRnh2Kc=', '2020-09-17 19:38:52.387940', 1, 'admin', '', '', '', 1, 1, '2020-09-17 19:38:27.832339');
+(1, 'pbkdf2_sha256$216000$fa3beB032Zd6$ybxMCvqCR8MQlgk+gzQ4/zwNIYE7DME739YqTRnh2Kc=', '2020-09-22 18:37:38.970970', 1, 'admin', '', '', '', 1, 1, '2020-09-17 19:38:27.832339'),
+(2, 'pbkdf2_sha256$216000$JU331y36wspT$Fi8dXfvEGQmvcgFSorCRfhE0Yx/dUR3cXTdjfF4PQ90=', NULL, 0, 'admin21', '', '', 'maks12@mail.ru', 0, 1, '2020-09-22 18:03:41.707381');
 
 -- --------------------------------------------------------
 
@@ -184,7 +208,7 @@ CREATE TABLE `book` (
 INSERT INTO `book` (`id`, `title`, `price`, `img`, `isbn`, `weight`, `dimensions`, `Series_id`, `Publisher_id`) VALUES
 (2, 'Алла Горбунова: Конец света, моя любовь. Рассказы', 977, 'book/img/name-img-book0.png', '978-5-4448-1228-0', 352, '207x130x25', 13, 47),
 (3, 'Анна Зенькова: Григорий без отчества Бабочкин', 841, 'book/img/name-img-book1.png', ' 978-5-00083-732-0', 502, ' 217x145x29', 11, 50),
-(4, 'Екатерина Мурашова: Гвардия тревоги', 480, 'book/img/name-img-book2.png', ' 978-5-907180-30-7', 416, ' 200x145x30', 2, 46),
+(4, 'Екатерина Мурашова: Гвардия тревоги', 480, 'book/img/name-img-book2.png', '978-5-907180-30-7', 416, '200x145x30', 2, 46),
 (5, 'Генри Хаггард: Копи царя Соломона', 6400, 'book/img/name-img-book3.png', ' 978-5-906928-04-7', 1454, ' 296x210x32', 6, 49),
 (6, 'Марина Степнова: Сад', 620, 'book/img/name-img-book4.png', ' 978-5-17-118995-2', 424, ' 207x135x28', 17, 45),
 (7, 'Артур Дойл: Песни действия', 578, 'book/img/name-img-book5.png', ' 978-5-7516-1444-7', 212, ' 173x132x13', 18, 53),
@@ -201,14 +225,14 @@ INSERT INTO `book` (`id`, `title`, `price`, `img`, `isbn`, `weight`, `dimensions
 (18, 'Редьярд Киплинг: Нетландия. Всегда ваш, пес Бутс', 832, 'book/img/name-img-book16.png', ' 978-5-9287-3174-8', 574, ' 264x205x13', 4, 57),
 (19, 'Энн Хогарт: Мафин и его веселые друзья', 496, 'book/img/name-img-book17.png', ' 978-5-9287-2791-8', 380, ' 263x203x11', 4, 57),
 (20, 'Наталья Теремкова: Практический тренажер по развитию. Выпуск 1. ФГОС ДО', 304, 'book/img/name-img-book18.png', ' 978-5-906889003xa0 ', 122, ' 284x210x3', 12, 51),
-(21, 'Надежда Мамаева: Ты же ведьма!', 392, 'book/img/name-img-book19.png', ' 978-5-9922-3089-5', 256, ' 208x135x20', 8, 56),
-(22, 'Лена Сокол: Сердце умирает медленно', 450, 'book/img/name-img-book20.png', ' 978-5-04-111976-8', 329, ' 207x130x21', 16, 54),
-(23, 'Белянин, Менделеева: Ученица царя обезьян', 454, 'book/img/name-img-book21.png', ' 978-5-9922-3124-3', 252, ' 207x135x22', 1, 56),
+(21, 'Надежда Мамаева: Ты же ведьма!', 392, 'book/img/name-img-book19.png', '978-5-9922-3089-5', 256, '208x135x20', 8, 56),
+(22, 'Лена Сокол: Сердце умирает медленно', 450, 'book/img/name-img-book20.png', '978-5-04-111976-8', 329, '207x130x21', 16, 54),
+(23, 'Белянин, Менделеева: Ученица царя обезьян', 454, 'book/img/name-img-book21.png', '978-5-9922-3124-3', 252, '207x135x22', 1, 56),
 (24, 'Гилберт Честертон: Мудрость отца Брауна', 721, 'book/img/name-img-book22.png', ' 978-5-00108-234-7', 442, ' 210x147x20', 5, 55),
-(25, 'Андрей Белянин: Кицунэ', 454, 'book/img/name-img-book23.png', ' 978-5-9922-3121-2', 338, ' 207x132x22', 1, 56),
-(26, 'Владимир Корн: Теоретик. Один и без оружия', 416, 'book/img/name-img-book24.png', ' 978-5-9922-3130-4', 255, ' 205x130x25', 1, 56),
-(27, 'Мгновения до бури. Выбор Леди', 392, 'book/img/name-img-book25.png', ' 978-5-9922-3128-1', 271, ' 205x130x25', 8, 56),
-(28, 'Ночи с Шахразадой', 480, 'book/img/name-img-book26.png', ' 978-5-907338-01-2', 256, ' 217x147x14', 9, 52),
+(25, 'Андрей Белянин: Кицунэ', 454, 'book/img/name-img-book23.png', '978-5-9922-3121-2', 338, '207x132x22', 1, 56),
+(26, 'Владимир Корн: Теоретик. Один и без оружия', 416, 'book/img/name-img-book24.png', '978-5-9922-3130-4', 255, '205x130x25', 1, 56),
+(27, 'Мгновения до бури. Выбор Леди', 392, 'book/img/name-img-book25.png', '978-5-9922-3128-1', 271, '205x130x25', 8, 56),
+(28, 'Ночи с Шахразадой', 480, 'book/img/name-img-book26.png', '978-5-907338-01-2', 256, '217x147x14', 9, 52),
 (29, 'Ганс Андерсен: Снежная королева', 624, 'book/img/name-img-book27.png', '978-5-907224-91-1', 420, '265x205x13', 3, 48),
 (33, 'Маргарита Фадеева: Приключения Петрушки', 832, 'book/img/name-img-book28.png', '978-5-907224-31-5', 660, '265x205x18', 3, 48);
 
@@ -375,6 +399,31 @@ CREATE TABLE `book_author` (
   `author_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `book_author`
+--
+
+INSERT INTO `book_author` (`id`, `book_id`, `author_id`) VALUES
+(15, 2, 117),
+(19, 2, 123),
+(14, 2, 130),
+(16, 4, 117),
+(17, 4, 135),
+(18, 21, 135),
+(12, 22, 114),
+(13, 22, 135),
+(11, 23, 120),
+(10, 25, 121),
+(9, 25, 144),
+(7, 26, 137),
+(8, 26, 139),
+(6, 27, 146),
+(4, 28, 114),
+(5, 28, 135),
+(3, 29, 126),
+(2, 29, 146),
+(1, 33, 135);
+
 -- --------------------------------------------------------
 
 --
@@ -387,6 +436,28 @@ CREATE TABLE `book_editor` (
   `author_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `book_editor`
+--
+
+INSERT INTO `book_editor` (`id`, `book_id`, `author_id`) VALUES
+(13, 2, 117),
+(12, 2, 146),
+(14, 4, 130),
+(15, 21, 106),
+(16, 21, 133),
+(10, 22, 114),
+(11, 22, 135),
+(8, 23, 107),
+(9, 23, 133),
+(7, 25, 146),
+(6, 26, 114),
+(5, 27, 121),
+(4, 28, 116),
+(3, 29, 135),
+(1, 33, 112),
+(2, 33, 135);
+
 -- --------------------------------------------------------
 
 --
@@ -398,6 +469,41 @@ CREATE TABLE `book_genre` (
   `book_id` int(11) NOT NULL,
   `genre_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `book_genre`
+--
+
+INSERT INTO `book_genre` (`id`, `book_id`, `genre_id`) VALUES
+(29, 2, 44),
+(30, 2, 45),
+(23, 2, 48),
+(26, 4, 47),
+(25, 4, 51),
+(27, 21, 44),
+(28, 21, 46),
+(21, 22, 45),
+(22, 22, 46),
+(20, 22, 51),
+(18, 23, 45),
+(19, 23, 47),
+(17, 23, 48),
+(14, 25, 44),
+(15, 25, 45),
+(16, 25, 46),
+(13, 26, 46),
+(11, 26, 48),
+(12, 26, 49),
+(9, 27, 45),
+(10, 27, 47),
+(8, 27, 51),
+(6, 28, 45),
+(7, 28, 47),
+(5, 28, 50),
+(4, 29, 50),
+(2, 33, 44),
+(3, 33, 47),
+(1, 33, 51);
 
 -- --------------------------------------------------------
 
@@ -422,7 +528,18 @@ CREATE TABLE `django_admin_log` (
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
 (1, '2020-09-17 19:52:13.079978', '29', 'Ганс Андерсен: Снежная королева', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\"]}}]', 11, 1),
-(2, '2020-09-17 19:53:06.759649', '2', 'Алла Горбунова: Конец света, моя любовь. Рассказы', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\"]}}]', 11, 1);
+(2, '2020-09-17 19:53:06.759649', '2', 'Алла Горбунова: Конец света, моя любовь. Рассказы', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\"]}}]', 11, 1),
+(3, '2020-09-19 10:29:32.667530', '33', 'Маргарита Фадеева: Приключения Петрушки', 2, '[{\"changed\": {\"fields\": [\"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(4, '2020-09-19 10:29:58.627525', '29', 'Ганс Андерсен: Снежная королева', 2, '[{\"changed\": {\"fields\": [\"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(5, '2020-09-19 10:30:06.422156', '28', 'Ночи с Шахразадой', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(6, '2020-09-19 10:30:10.116250', '28', 'Ночи с Шахразадой', 2, '[]', 11, 1),
+(7, '2020-09-19 10:30:27.624790', '27', 'Мгновения до бури. Выбор Леди', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(8, '2020-09-19 10:30:34.075926', '26', 'Владимир Корн: Теоретик. Один и без оружия', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(9, '2020-09-19 10:30:38.629877', '26', 'Владимир Корн: Теоретик. Один и без оружия', 2, '[]', 11, 1),
+(10, '2020-09-19 10:30:45.423741', '25', 'Андрей Белянин: Кицунэ', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(11, '2020-09-19 10:30:58.915301', '23', 'Белянин, Менделеева: Ученица царя обезьян', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(12, '2020-09-19 10:31:06.061259', '22', 'Лена Сокол: Сердце умирает медленно', 2, '[{\"changed\": {\"fields\": [\"Isbn\", \"\\u0420\\u0430\\u0437\\u043c\\u0435\\u0440\\u044b\", \"Genre\", \"Author\", \"Editor\"]}}]', 11, 1),
+(13, '2020-09-19 10:31:11.888233', '2', 'Алла Горбунова: Конец света, моя любовь. Рассказы', 2, '[{\"changed\": {\"fields\": [\"Genre\", \"Author\", \"Editor\"]}}]', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -445,6 +562,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
+(12, 'authtoken', 'token'),
 (7, 'book', 'author'),
 (11, 'book', 'book'),
 (9, 'book', 'genre'),
@@ -505,7 +623,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (32, 'book', '0014_auto_20200917_2250', '2020-09-17 19:50:46.455279'),
 (33, 'book', '0015_auto_20200917_2251', '2020-09-17 19:51:20.634117'),
 (34, 'book', '0016_book_author', '2020-09-17 19:55:49.318230'),
-(35, 'book', '0017_auto_20200917_2301', '2020-09-17 20:01:05.011617');
+(35, 'book', '0017_auto_20200917_2301', '2020-09-17 20:01:05.011617'),
+(36, 'book', '0018_auto_20200919_1844', '2020-09-19 15:44:51.872783'),
+(37, 'authtoken', '0001_initial', '2020-09-22 17:13:01.954637'),
+(38, 'authtoken', '0002_auto_20160226_1747', '2020-09-22 17:13:02.000303'),
+(39, 'book', '0019_auto_20200922_2012', '2020-09-22 17:13:02.077509');
 
 -- --------------------------------------------------------
 
@@ -520,15 +642,15 @@ CREATE TABLE `django_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('0j1k6ghx9n2a08ghvey6n98bxucyi0lt', '.eJxVjDsOwjAQBe_iGlnxZ_2hpM8ZrPXaxgHkSHFSIe5OIqWA9s3Me7OA21rD1vMSpsSuTLDL7xaRnrkdID2w3WdOc1uXKfJD4SftfJxTft1O9--gYq97rWUkAc4AotVCeG-MB8CIRRodB2sxDx5QeQXGoiTSKlNxCvfI6uLY5wvBKDce:1kIzk4:LGqcoZw-XREhlEVQOwGanOZvbwkqXPxYdkjmECne79s', '2020-10-01 19:38:52.388972');
-
---
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `authtoken_token`
+--
+ALTER TABLE `authtoken_token`
+  ADD PRIMARY KEY (`key`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `auth_group`
@@ -581,8 +703,8 @@ ALTER TABLE `auth_user_user_permissions`
 ALTER TABLE `book`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `isbn` (`isbn`),
-  ADD KEY `book_Publisher_id_afb15c76_fk_book_publisher_id` (`Publisher_id`),
-  ADD KEY `book_Series_id_db6171d3_fk_book_series_id` (`Series_id`);
+  ADD KEY `book_Publisher_id_afb15c76_fk_book-publisher_id` (`Publisher_id`),
+  ADD KEY `book_Series_id_db6171d3_fk_book-series_id` (`Series_id`);
 
 --
 -- Индексы таблицы `book-author`
@@ -634,7 +756,7 @@ ALTER TABLE `book_editor`
 ALTER TABLE `book_genre`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `book_Genre_book_id_genre_id_1ca227ad_uniq` (`book_id`,`genre_id`),
-  ADD KEY `book_Genre_genre_id_5a1426c5_fk_genreBook_id` (`genre_id`);
+  ADD KEY `book_Genre_genre_id_5a1426c5_fk_book-genre_id` (`genre_id`);
 
 --
 -- Индексы таблицы `django_admin_log`
@@ -684,13 +806,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT для таблицы `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_user_groups`
@@ -738,41 +860,47 @@ ALTER TABLE `book-series`
 -- AUTO_INCREMENT для таблицы `book_author`
 --
 ALTER TABLE `book_author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `book_editor`
 --
 ALTER TABLE `book_editor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `book_genre`
 --
 ALTER TABLE `book_genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `authtoken_token`
+--
+ALTER TABLE `authtoken_token`
+  ADD CONSTRAINT `authtoken_token_user_id_35299eff_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `auth_group_permissions`
@@ -805,8 +933,8 @@ ALTER TABLE `auth_user_user_permissions`
 -- Ограничения внешнего ключа таблицы `book`
 --
 ALTER TABLE `book`
-  ADD CONSTRAINT `book_Publisher_id_afb15c76_fk_book_publisher_id` FOREIGN KEY (`Publisher_id`) REFERENCES `book-publisher` (`id`),
-  ADD CONSTRAINT `book_Series_id_db6171d3_fk_book_series_id` FOREIGN KEY (`Series_id`) REFERENCES `book-series` (`id`);
+  ADD CONSTRAINT `book_Publisher_id_afb15c76_fk_book-publisher_id` FOREIGN KEY (`Publisher_id`) REFERENCES `book-publisher` (`id`),
+  ADD CONSTRAINT `book_Series_id_db6171d3_fk_book-series_id` FOREIGN KEY (`Series_id`) REFERENCES `book-series` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `book_author`
@@ -827,7 +955,7 @@ ALTER TABLE `book_editor`
 --
 ALTER TABLE `book_genre`
   ADD CONSTRAINT `book_Genre_book_id_ec6bff5f_fk_book_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `book_Genre_genre_id_5a1426c5_fk_genreBook_id` FOREIGN KEY (`genre_id`) REFERENCES `book-genre` (`id`);
+  ADD CONSTRAINT `book_Genre_genre_id_5a1426c5_fk_book-genre_id` FOREIGN KEY (`genre_id`) REFERENCES `book-genre` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `django_admin_log`

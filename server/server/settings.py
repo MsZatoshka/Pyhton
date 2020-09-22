@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
- 
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,10 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',    
+    'djoser',  
+    'rest_framework',
+    'rest_framework.authtoken',
     'main',
     'book',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
