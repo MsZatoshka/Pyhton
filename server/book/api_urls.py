@@ -1,6 +1,4 @@
-
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from book.views import *
 from . import views
 
@@ -12,7 +10,10 @@ urlpatterns = [
 
 	path('author/list/', AuthorList.as_view()),
     path('author/<int:pk>', AuthorDetails.as_view()),
-    # path('filter/author/', AuthorListBooks.as_view(), name='author_name'),
+    
+
+    re_path(r'filter/author/(?P<id>.+)/', AuthorListBooks.as_view()),
+    re_path(r'filter/genre/(?P<id>.+)/', GenreListBooks.as_view()),
 
     path('publisher/list/', PublisherList.as_view()),
     path('publisher/<int:pk>', PublisherDetails.as_view()),

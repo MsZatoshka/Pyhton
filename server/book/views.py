@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from book.pagination import CustomPagination
 from rest_framework.permissions import (IsAdminUser ,)
+from django.db.models import Q
 
 
 # Главная API-book
@@ -22,11 +23,14 @@ class AuthorDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class AuthorListBooks(generics.ListAPIView):
 	serializer_class = BookListSerializers
-	queryset = book.objects.all() 
-	# def get_queryset(self, *args, **kwargs):
-		# pass
-# query_list = author.objects.filter(name=author_name)# Издатель
+	pagination_class = CustomPagination
+	def get_queryset(self):
+		username = self.kwargs['id']
+		authorArray =  book.objects.filter(Q(Author=username) | Q(Editor = username)).distinct()
+		#  Editor Author
+		return authorArray
 
+# Публикация 
 class PublisherList(generics.ListAPIView):
 	queryset = publisher.objects.all()
 	serializer_class = AuthorListSerializers
@@ -52,6 +56,12 @@ class GenreDetails(generics.RetrieveUpdateDestroyAPIView):
 	queryset = genre.objects.all() 
 	serializer_class = GenreDetailsSerializers
 	permission_classes = (IsAdminUser ,)
+class GenreListBooks(generics.ListAPIView):
+	serializer_class = BookListSerializers
+	pagination_class = CustomPagination
+	def get_queryset(self):
+		username = self.kwargs['id']
+		return book.objects.filter(Genre = username) 
 
 # КНИГА
 class BookList(generics.ListAPIView):
